@@ -1,0 +1,2 @@
+# Works with both NTLMSSP and Kerberos
+PYTHONPATH='/home/user/samba/bin/python:/home/user/python-wcfbin' python3  ./test_adws.py DC-1.REALM.COM --ipaddress 127.0.0.4 -UAdministrator%password12#  --realm=REALM.COM -k no
