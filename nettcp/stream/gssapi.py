@@ -56,17 +56,19 @@ class GSSAPIStream:
             sub = self._inner.read()
             return self.client_ctx.decrypt(sub)
 
+        data_final = b''
         while count > 0:
             data = self._readcache[:count]
             self._readcache = self._readcache[count:]
             ld = len(data)
             log.debug('Got %d bytes from cache', ld)
             count -= ld
+            data_final += data
             if count:
                 log.debug('Still %d bytes missing', count)
                 sub = self._inner.read()
                 self._readcache += self.client_ctx.decrypt(sub)
-        return data
+        return data_final
 
     def close(self):
         self._inner.close()
